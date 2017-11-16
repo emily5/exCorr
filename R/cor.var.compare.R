@@ -1,10 +1,5 @@
 #' Differential correlations between a single variable and all variables within a dataset
 #'
-#' @variable the variable of interest 
-#'
-#' @data the dataset to be used
-#'
-#' @group the variable to distinguish between correlation groups
 #'
 #' @author Emily Mears, \email{mears.emilyrose@gmail.com}
 #'

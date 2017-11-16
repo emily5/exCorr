@@ -2,13 +2,6 @@
 #'
 #' Creates two correlation plots between two variables, separated by a grouping variable
 #'
-#' @var_1 the first variable for corre;ation analyses
-#'
-#' @var_2 the second variable for correlation analyses
-#'
-#' @data the dataset to be used
-#'
-#' @group the variable to distinguish between correlation groups
 #'
 #' @author Emily Mears, \email{mears.emilyrose@gmail.com}
 #'

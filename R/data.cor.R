@@ -1,12 +1,5 @@
 #' Differential correlations between all variables within a dataset
 #'
-#' @data the dataset to be used
-#'
-#' @group the variable to distinguish between correlation groups
-#'
-#' @odered which column should the table be ordered by?
-#'
-#' @limit how many combinations should be displayed?
 #'
 #' @author Emily Mears, \email{mears.emilyrose@gmail.com}
 #'
