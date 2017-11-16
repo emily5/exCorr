@@ -6,6 +6,18 @@
 \usage{
 gg.corr.vis(var_1, var_2, data, group)
 }
+\arguments{
+\item{var_1}{the first variable for differential correlation}
+
+\item{var_2}{the second variable for differential correlation}
+
+\item{data}{the dataset for analysis}
+
+\item{group}{the grouping variable for comparative differential correlations}
+}
+\value{
+two correlation plots for each group with correlation coefficents and p-values
+}
 \description{
 Creates two correlation plots between two variables, separated by a grouping variable
 }

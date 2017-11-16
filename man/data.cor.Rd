@@ -6,6 +6,18 @@
 \usage{
 data.cor(data, group, ordered = "None", limit = NA)
 }
+\arguments{
+\item{data}{the dataset for analysis}
+
+\item{group}{the grouping variable for comparative differential correlations}
+
+\item{ordered}{which column should the table be ordered by?}
+
+\item{limit}{how many combinations should the table display}
+}
+\value{
+a table (or dataframe) with the correlation coefficients, p-values, fisher r-to-z statistic and BH p-value correlation for each correlation pair
+}
 \description{
 Differential correlations between all variables within a dataset
 }

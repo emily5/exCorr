@@ -1,5 +1,10 @@
 #' Differential correlations between a single variable and all variables within a dataset
 #'
+#' @param variable the variable of interest for differential correlation
+#' @param data the dataset for analysis
+#' @param group the grouping variable for comparative differential correlations
+#'
+#' @return a table (or dataframe) with the correlation coefficients, p-values, fisher r-to-z statistic and BH p-value correlation for each correlation pair
 #'
 #' @author Emily Mears, \email{mears.emilyrose@gmail.com}
 #'

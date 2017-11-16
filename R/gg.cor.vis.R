@@ -2,6 +2,12 @@
 #'
 #' Creates two correlation plots between two variables, separated by a grouping variable
 #'
+#' @param var_1 the first variable for differential correlation
+#' @param var_2 the second variable for differential correlation
+#' @param data the dataset for analysis
+#' @param group the grouping variable for comparative differential correlations
+#'
+#' @return two correlation plots for each group with correlation coefficents and p-values
 #'
 #' @author Emily Mears, \email{mears.emilyrose@gmail.com}
 #'

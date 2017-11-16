@@ -1,9 +1,7 @@
 Package: exCorr
 Title: An R package for differential correlation analyses
 Version: 0.0.0.9000
-Authors@R: person("Emily", "Mears", email = "mears.emilyrose@gmail.com", role = c("aut", "cre"))
+Authors: Emily Mears <mears.emilyrose@gmail.com>
 Description: An R package to explore and visualise differential correlations within a dataset
 Depends: R (>= 3.3.2)
-Encoding: UTF-8
-LazyData: true
 RoxygenNote: 6.0.1

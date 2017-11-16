@@ -6,6 +6,16 @@
 \usage{
 cor.var.compare(variable, data, group)
 }
+\arguments{
+\item{variable}{the variable of interest for differential correlation}
+
+\item{data}{the dataset for analysis}
+
+\item{group}{the grouping variable for comparative differential correlations}
+}
+\value{
+a table (or dataframe) with the correlation coefficients, p-values, fisher r-to-z statistic and BH p-value correlation for each correlation pair
+}
 \description{
 Differential correlations between a single variable and all variables within a dataset
 }
