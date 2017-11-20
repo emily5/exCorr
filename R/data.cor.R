@@ -72,11 +72,11 @@ data.cor <-  function(data, group, ordered = "None", limit = NA){
   group2Cors = flattenSquareMatrix(cor.prob(data[data[,group] == 2, lapply(data, class) == "numeric"]))
   group1and2Cors = cbind(group1Cors, group2Cors[3:4])
   
-  colnames(group1and2Cors) = c("Var1", "Var2", paste(group_1_name, "Correlation"), paste(group_1_name, "P-value"), paste(group_2_name, "Correlation"), paste(group_2_name, "P-value"))
-  Fisher_Value = as.array(my_compcorr(group1and2Cors))
+  colnames(group1and2Cors) = c("Var1", "Var2", paste(group_1_name, "correlation coefficent"), paste(group_1_name, "p-value"), paste(group_2_name, "correlation coefficent"), paste(group_2_name, "p-value"))
+  fisher_r_to_z = as.array(my_compcorr(group1and2Cors))
   
-  group1and2compcor = cbind(group1and2Cors, Fisher_Value)
-  BH_p_adjust <- p.adjust(Fisher_Value, method = "BH", n = length(Fisher_Value))
+  group1and2compcor = cbind(group1and2Cors, fisher_r_to_z)
+  BH_p_adjust <- p.adjust(fisher_r_to_z, method = "BH", n = length(fisher_r_to_z))
   group1and2compcor <- cbind(group1and2compcor, BH_p_adjust)
   
   #Ordering options
@@ -100,7 +100,7 @@ data.cor <-  function(data, group, ordered = "None", limit = NA){
     group1and2compcor = group1and2compcor[order(group1and2compcor[,6],decreasing=FALSE),]
   }
   
-  else if(ordered == "Fisher_value"){
+  else if(ordered == "fisher_r_to_z"){
     group1and2compcor = group1and2compcor[order(group1and2compcor[,7],decreasing=FALSE),]
   }
   
