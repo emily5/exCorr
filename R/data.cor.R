@@ -7,7 +7,7 @@
 #'
 #' @return a table (or dataframe) with the correlation coefficients, p-values, fisher r-to-z statistic and BH p-value correlation for each correlation pair
 #'
-#' @author Emily Mears, \email{mears.emilyrose@gmail.com}
+#' @author Emily Mears, \email{mears.emilyrose@gmail.com}, Matthew Grant
 #'
 #' @export
 #'

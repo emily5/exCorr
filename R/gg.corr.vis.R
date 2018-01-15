@@ -6,10 +6,12 @@
 #' @param var_2 the second variable for differential correlation
 #' @param data the dataset for analysis
 #' @param group the grouping variable for comparative differential correlations
+#' @param group_1_title the title for the first plot
+#' @param group_2_title the title for the second plot
 #'
 #' @return two correlation plots for each group with correlation coefficents and p-values
 #'
-#' @author Emily Mears, \email{mears.emilyrose@gmail.com}
+#' @author Emily Mears, \email{mears.emilyrose@gmail.com}, Matthew Grant
 #'
 #' @export
 #'
