@@ -13,6 +13,7 @@
 #'
 
 
+
 data.cor <-  function(data, group, ordered = "None", limit = NA){
   
   cor.prob <- function(X, dfr = nrow(X) -2){
@@ -65,11 +66,8 @@ data.cor <-  function(data, group, ordered = "None", limit = NA){
   group_1_name = as.character(data[,group][1])
   group_2_name = as.character(data[data[,group] != as.character(data[,group][1]),group][1])
   
-  data[which(as.character(data[,which(colnames(data) == group)]) == as.character(data[,which(colnames(data) == group)])[1]), which(colnames(data) == group)] = "1"
-  data[which(as.character(data[,which(colnames(data) == group)]) != as.character(data[,which(colnames(data) == group)])[1]), which(colnames(data) == group)] = "2"
-  
-  group1Cors = flattenSquareMatrix(cor.prob(data[data[,group] == 1, lapply(data, class) == "numeric"]))
-  group2Cors = flattenSquareMatrix(cor.prob(data[data[,group] == 2, lapply(data, class) == "numeric"]))
+  group1Cors = flattenSquareMatrix(cor.prob(data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], lapply(data, class) == "numeric"]))
+  group2Cors = flattenSquareMatrix(cor.prob(data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], lapply(data, class) == "numeric"]))
   group1and2Cors = cbind(group1Cors, group2Cors[3:4])
   
   colnames(group1and2Cors) = c("Var1", "Var2", paste(group_1_name, "correlation coefficent"), paste(group_1_name, "p-value"), paste(group_2_name, "correlation coefficent"), paste(group_2_name, "p-value"))

@@ -39,29 +39,24 @@ cor.var.compare <- function(variable, data, group){
   group_1_name = as.character(data[,group][1])
   group_2_name = as.character(data[data[,group] != as.character(data[,group][1]),group][1])
   
-  data[which(as.character(data[,which(colnames(data) == group)]) == as.character(data[,which(colnames(data) == group)])[1]), which(colnames(data) == group)] = 1
-  data[which(as.character(data[,which(colnames(data) == group)]) != as.character(data[,which(colnames(data) == group)])[1]), which(colnames(data) == group)] = 2
-  
-  data[,group] = as.numeric(data[,group])
-  
   cond1_cor_pvals = list()
   for(i in 1:ncol(data[, lapply(data, class) == "numeric"])){
-    cond1_cor_pvals[i] = cor.test(data[data[,group] == 1, variable], data[data[,group] == 1, lapply(data, class) == "numeric"][,i])$p.value
+    cond1_cor_pvals[i] = cor.test(data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], variable], data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], lapply(data, class) == "numeric"][,i])$p.value
   }
   
   cond2_cor_pvals = list()
   for(i in 1:ncol(data[, lapply(data, class) == "numeric"])){
-    cond2_cor_pvals[i] = cor.test(data[data[,group] == 2, variable], data[data[,group] == 2, lapply(data, class) == "numeric"][,i])$p.value
+    cond2_cor_pvals[i] = cor.test(data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], variable], data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], lapply(data, class) == "numeric"][,i])$p.value
   }
   cond1_cor_pvals = unlist(cond1_cor_pvals)
   cond2_cor_pvals = unlist(cond2_cor_pvals)
   
-  cond1_cor <- cor(data[data[,group] == 1, lapply(data, class) == "numeric"],data[data[,group] == 1, variable])
-  cond2_cor <- cor(data[data[,group] == 2, lapply(data, class) == "numeric"],data[data[,group] == 2, variable])
+  cond1_cor <- cor(data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], lapply(data, class) == "numeric"],data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], variable])
+  cond2_cor <- cor(data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], lapply(data, class) == "numeric"],data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], variable])
   var_cor <- cbind(cond1_cor, cond1_cor_pvals, cond2_cor, cond2_cor_pvals)
   # then append Fisher r to z as a 3rd column and order
-  fisher <- compcor(n1 = length(data[data[,group] == 1,variable]), r1 = var_cor[,1], 
-                    n2 = length(data[data[,group] == 2,variable]), r2 = var_cor[,3])$pval
+  fisher <- compcor(n1 = length(data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], variable]), r1 = var_cor[,1], 
+                    n2 = length(data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], variable]), r2 = var_cor[,3])$pval
   var_cor_fish <- cbind(var_cor, fisher)
   # then append a column that adjusts p-values for multiple testing
   p_adjust <- p.adjust(fisher, method = "BH", n = length(fisher))
@@ -75,3 +70,5 @@ cor.var.compare <- function(variable, data, group){
                               "BH p-value adjustment")
   return(as.data.frame(var_cor_fish))
 }
+
+

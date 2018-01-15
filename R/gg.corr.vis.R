@@ -14,18 +14,14 @@
 #' @export
 #'
 
-gg.corr.vis <- function(var_1, var_2, data, group){
+gg.corr.vis <- function(var_1, var_2, data, group, group_1_title = "Group 1 Correlation", group_2_title = "Group 2 Correlation"){
   
-    #Changes the input factor into a character string, which can be easily manipulated
+  #Changes the input factor into a character string, which can be easily manipulated
   data[,which(colnames(data) == group)] = as.character(data[,which(colnames(data) == group)])
   
   #Extract the names for the two levels of the factor used, so this information can be used down-stream in the legend
   group_1_name = as.character(data[,group][1])
   group_2_name = as.character(data[data[,group] != as.character(data[,group][1]),group][1])
-  
-  #Change the character string occuring first into 1 and the character strings that do not equal the first into 2.
-  data[which(as.character(data[,which(colnames(data) == group)]) == as.character(data[,which(colnames(data) == group)])[1]), which(colnames(data) == group)] = as.numeric(1)
-  data[which(as.character(data[,which(colnames(data) == group)]) != as.character(data[,which(colnames(data) == group)])[1]), which(colnames(data) == group)] = as.numeric(2)
   
   # function to append stats to PolyQ plots
   ggplottrend <- function (fit) {
@@ -66,33 +62,31 @@ gg.corr.vis <- function(var_1, var_2, data, group){
       }
     }
   }
-
+  
   # FIT MODELS
   
-  model1 <- lm(data[data[,group] == 1 , var_1] ~ data[data[,group] == 1, var_2]) # for condition 1
-  model2 <- lm(data[data[,group] == 2, var_1] ~ data[data[,group] == 2, var_2]) # for condition 2
+  model1 <- lm(data[data[,group] == as.character(data[,which(colnames(data) == group)])[1] , var_1] ~ data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], var_2]) # for condition 1
+  model2 <- lm(data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], var_1] ~ data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], var_2]) # for condition 2
   
   p1 <- ggplottrend(model1)+
-    labs(title = "Control correlation")+
+    labs(title = group_1_title)+
     xlab(var_2)+
     ylab(var_1)+
-    labs(subtitle = paste("r =", signif(cor.test(data[data[,group] == 1, var_2], data[data[,group] == 1, var_1])$estimate[[1]],2), 
+    labs(subtitle = paste("r =", signif(cor.test(data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], var_2], data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], var_1])$estimate[[1]],2), 
                           "    ",
-                          "P =", signif(cor.test(data[data[,group] == 1, var_2], data[data[,group] == 1, var_1])$p.value[[1]],4)))+
+                          "P =", signif(cor.test(data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], var_2], data[data[,group] == as.character(data[,which(colnames(data) == group)])[1], var_1])$p.value[[1]],4)))+
     stat_smooth(method = "lm", col = "blue")
   
   
   p2 <- ggplottrend(model2)+
-    labs(title = "OVT73 correlation")+
+    labs(title = group_2_title)+
     xlab(var_2)+
     ylab(var_1)+
-    labs(subtitle = paste("r =", signif(cor.test(data[data[,group] == 2, var_2], data[data[,group] == 2, var_1])$estimate[[1]],2),
+    labs(subtitle = paste("r =", signif(cor.test(data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], var_2], data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], var_1])$estimate[[1]],2),
                           "    ",
-                          "P =", signif(cor.test(data[data[,group] == 2, var_2], data[data[,group] == 2, var_1])$p.value[[1]],4)))+
+                          "P =", signif(cor.test(data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], var_2], data[data[,group] != as.character(data[,which(colnames(data) == group)])[1], var_1])$p.value[[1]],4)))+
     stat_smooth(method = "lm", col = "red")
   
   # visualise both plots
   multiplot(p1,p2,cols = 2)
 }
-
-
