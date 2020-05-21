@@ -2,4 +2,7 @@
 
 export(cor.var.compare)
 export(data.cor)
-export(gg.corr.vis)
+export(gg.cor.vis)
+export(multi.cor.var.compare)
+export(multi.data.cor)
+export(multi.gg.cor.vis)

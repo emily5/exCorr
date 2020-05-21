@@ -1,7 +1,7 @@
 Package: exCorr
 Title: An R package for differential correlation analyses
-Version: 0.0.0.9000
-Authors: Emily Mears <mears.emilyrose@gmail.com> Matthew Grant
+Version: 1.0.0
+Authors: Emily Mears <mears.emilyrose@gmail.com>, Matthew Grant <mgra576@aucklanduni.ac.nz>, Ben Day <benjamindayengineer@gmail.com>
 Description: An R package to explore and visualise differential correlations within a dataset
 Depends: R (>= 3.3.2)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
